@@ -13,7 +13,7 @@ class TypeUsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('typeuser')->insert([
+        DB::table('typeUser')->insert([
             'nameType'=>'Desarrollador',  
             'descriptionType'=>'Rol creado para instalar',
             

@@ -12,7 +12,7 @@ class TypeProduct extends Model
     use HasFactory;
     
 
-    protected $table="typesproducts";
+    protected $table="typesProducts";
 
     protected $filable =['id','typeProduct'];
     protected $casts = [

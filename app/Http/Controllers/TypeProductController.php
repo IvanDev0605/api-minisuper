@@ -15,7 +15,7 @@ class TypeProductController extends Controller
     {
         $request->validate(
             [
-                'typeProduct' => 'required|unique:typesproducts',
+                'typeProduct' => 'required|unique:typesProducts',
                 'descriptionType' => 'required'
 
                 

@@ -12,7 +12,7 @@ class TypeUser extends Model
     use HasFactory;
     
 
-    protected $table="TypeUser";
+    protected $table="typeUser";
 
     protected $filable =['id','nameType','descriptionType'];
     protected $casts = [

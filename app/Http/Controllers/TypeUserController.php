@@ -26,7 +26,7 @@ class TypeUserController extends Controller
     {
         $request->validate(
             [
-                'nameType' => 'required|unique:typeuser',
+                'nameType' => 'required|unique:typeUser',
                 'descriptionType' => 'required'
 
             ],
