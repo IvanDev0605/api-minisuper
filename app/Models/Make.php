@@ -12,7 +12,7 @@ class Make extends Model
     use HasFactory;
     
 
-    protected $table="makesproduct";
+    protected $table="makesProduct";
 
     protected $filable =['id','nameMake','imgMake'];
     protected $casts = [
