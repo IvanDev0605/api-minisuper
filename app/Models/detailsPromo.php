@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Promotion;
+use App\Models\Product;
+use App\Models\Make;
+use App\Models\TypeProduct;
+use App\Models\Size;
 
 class detailsPromo extends Model
 {
@@ -41,14 +45,41 @@ class detailsPromo extends Model
         
     }
 
+
+    public function verDetalles($id){
+
+        $detallePromocion = detailsPromo::with([
+            'Product'=> function($query){
+                $query->select('id','nameProduct','codeProduct','imgProduct','idType','idSize')
+                    ->with([
+                        'typeProduct' => function($query) {
+                            $query->select('id', 'typeProduct');
+                        },
+                        'size' => function($query) {
+                            $query->select('id', 'nameSize', 'milliliters');
+                        }
+                    ]);
+            }
+        ])->where('idPromo', $id)
+        ->get();
+        
+        return respConsulta('producto',$detallePromocion); 
+        
+    }
   
 
     
     
     public function product()
     {
-        return $this->hasMany(Product::class, 'idProduct','id');
+        return $this->belongsTo(Product::class, 'idProduct','id');
     }
-    
+
+      
+    public function promo()
+    {
+        return $this->belongsTo(Promotion::class, 'idPromo','id');
+    }
+
    
 }

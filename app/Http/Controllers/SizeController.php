@@ -16,7 +16,7 @@ class SizeController extends Controller
         $request->validate(
             [
                 'nameSize' => 'required|unique:sizes',
-                'milliliters' => 'required',
+                'milliliters' => 'required|numeric|min:1',
                 'unidadMedida' =>'required'
 
                 
@@ -25,6 +25,8 @@ class SizeController extends Controller
                 'nameSize.unique' => 'El tipo ya esta registrado',
                 'milliliters.required' => 'Hace falta la cantidad',
                 'unidadMedida.required' => 'Hace falta la descripción',
+                'milliliters.numeric' => 'La cantidad debe ser numérica',    
+                'milliliters.min' => 'La cantidad debe ser mayor a 0',
               
             ]
         );

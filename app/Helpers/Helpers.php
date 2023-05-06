@@ -38,7 +38,7 @@ function respRegistro($modelo = null, $data = null, $status=null){
       'status' => $status,
       'message' => $modelo,
       'data' => $data
-    ]);
+    ],422);
   }}
   
 

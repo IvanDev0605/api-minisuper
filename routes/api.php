@@ -78,7 +78,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function () {
 
         /**detalles promocion */
         Route::group(['prefix' => 'detallePromocion'], function () {
-            Route::get("todos", [PromotionDetailsController::class, 'verDetallePromocion']);
+            Route::get("todos/{id}", [PromotionDetailsController::class, 'verDetallePromocion']);
             Route::post("registrar", [PromotionDetailsController::class, 'registrarDetallePromocion']);
             Route::get("eliminar/{id}", [PromotionDetailsController::class, 'eliminarDetallePromocion']);
         });

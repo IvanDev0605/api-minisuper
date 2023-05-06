@@ -15,10 +15,18 @@ class PromotionController extends Controller
                 
                 'promoName'=>'required|unique:promotions',
                 'promoDescription'=>'required',
-                'promoPrice'=>'required'
+                'promoPrice'=>'required|numeric|min:1'
                 
             ],
             [
+
+                'promoName.required'=>'hace falta el nombre',
+                'promoName.unique' => 'El nombre de la promoción ya está en uso',
+                'promoDescription.required'=>'hace falta la descripción',
+                'promoPrice.required'=>'hace falta el precio',
+                'promoPrice.numeric' => 'El precio de la promoción debe ser numérico',      
+                  'promoPrice.min' => 'El precio de la promoción debe ser mayor a 0' 
+
             ]
         );
 

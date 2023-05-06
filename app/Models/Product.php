@@ -70,9 +70,9 @@ salePrice*/
     public function obtenerProducto($id){
         $producto = Product::with(['makesproduct'=> function($query){
             $query->select('id','nameMake');
-         },'typesproducts' => function($query){
+         },'typeProduct' => function($query){
             $query->select('id','typeProduct');
-         },'sizes'=> function($query){
+         },'size'=> function($query){
              $query->select('id','nameSize','milliliters');
           }])->where('codeProduct',$id)
           ->get();
@@ -102,14 +102,15 @@ salePrice*/
     return $this->belongsTo(Make::class, 'idMake','id');
 }
 
-public function typesproducts()
+public function typeProduct()
 {
     return $this->belongsTo(TypeProduct::class, 'idType','id');
 }
-public function sizes()
+public function size()
 {
     return $this->belongsTo(Size::class, 'idSize','id');
 }
+    
 
 
 }
