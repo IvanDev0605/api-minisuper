@@ -72,7 +72,8 @@ salePrice*/
             $query->select('id','nameMake');
          },'typeProduct' => function($query){
             $query->select('id','typeProduct');
-         },'size'=> function($query){
+         },'size
+         '=> function($query){
              $query->select('id','nameSize','milliliters');
           }])->where('codeProduct',$id)
           ->get();
@@ -88,9 +89,9 @@ salePrice*/
         
         $producto = Product::with(['makesproduct'=> function($query){
            $query->select('id','nameMake');
-        },'typesproducts' => function($query){
+        },'typeProduct' => function($query){
            $query->select('id','typeProduct');
-        },'sizes'=> function($query){
+        },'size'=> function($query){
             $query->select('id','nameSize','milliliters');
          }])->get();
         
