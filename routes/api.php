@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//push de prueba
+
 Route::post("login", [LoginController::class, 'login']);
 
 Route::group(['middleware' => ["auth:sanctum"]], function () {
