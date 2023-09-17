@@ -1,1 +1,1 @@
-import './bootstrap';
+//compilado 2
