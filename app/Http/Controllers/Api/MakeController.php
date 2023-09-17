@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
+
 use Illuminate\Support\Facades\File;
 use App\Models\Make;
 use App\Models\User;
@@ -18,7 +19,7 @@ class MakeController extends Controller
                 'nameMake' => 'required|unique:makesProduct',
                 'imgMake' => 'required|mimes:png,jpg,jpeg'
 
-                
+
             ],
             [
                 'nameMake.unique' => 'El tipo ya esta registrado',
@@ -35,47 +36,47 @@ class MakeController extends Controller
         }
 
         $rutaPrincipal = public_path('img/imgMakes');
-        if(!File::isDirectory($rutaPrincipal)){
-            File::makeDirectory($rutaPrincipal,0777,TRUE,TRUE);
-          //  return respRegistro('se creo el directorio marcas',null, false);
+        if (!File::isDirectory($rutaPrincipal)) {
+            File::makeDirectory($rutaPrincipal, 0777, TRUE, TRUE);
+            //  return respRegistro('se creo el directorio marcas',null, false);
         }
-        if($request->hasFile('imgMake')){
+        if ($request->hasFile('imgMake')) {
             $imagen = $request->file('imgMake');
-            $nombreImg= $imagen->getClientOriginalName();
+            $nombreImg = $imagen->getClientOriginalName();
             $imageName = pathinfo($nombreImg, PATHINFO_FILENAME); // obtiene el nombre del archivo sin la extensión
             $imageName = $imageName . '_' . uniqid() . '.' . $request->file('imgMake')->getClientOriginalExtension();
-           
-            $imagen->move($rutaPrincipal,$imageName);
-            
-            $request->imgMake = 'img/imgMakes'.'/'.$imageName;
-         }
+
+            $imagen->move($rutaPrincipal, $imageName);
+
+            $request->imgMake = 'img/imgMakes' . '/' . $imageName;
+        }
 
         $marca = new Make();
 
         return $marca->registrarMarca($request);
     }
 
-    public function verMarcas(){
+    public function verMarcas()
+    {
 
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-     $marca= new Make();
-    return $marca->obtenerMarcas();
+        $marca = new Make();
+        return $marca->obtenerMarcas();
     }
 
-    public function eliminarMarca($id){
-   
+    public function eliminarMarca($id)
+    {
+
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-        $marca= new Make();
+        $marca = new Make();
         return $marca->eliminarMarca($id);
     }
-
-
 }

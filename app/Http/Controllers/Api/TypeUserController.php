@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\TypeUser;
 use App\Models\User;
@@ -10,15 +10,16 @@ use Illuminate\Http\Response;
 
 class TypeUserController extends Controller
 {
-    public function verTipos(){
-       
+    public function verTipos()
+    {
+
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
-       
-     $tipo= new TypeUser();
-    return $tipo->obtenerTipos();
+
+        $tipo = new TypeUser();
+        return $tipo->obtenerTipos();
     }
 
 
@@ -47,7 +48,4 @@ class TypeUserController extends Controller
 
         return $tipo->registrarTipo($request);
     }
-
-
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Promotion;
 use App\Models\User;
@@ -12,20 +12,20 @@ class PromotionController extends Controller
     {
         $request->validate(
             [
-                
-                'promoName'=>'required|unique:promotions',
-                'promoDescription'=>'required',
-                'promoPrice'=>'required|numeric|min:1'
-                
+
+                'promoName' => 'required|unique:promotions',
+                'promoDescription' => 'required',
+                'promoPrice' => 'required|numeric|min:1'
+
             ],
             [
 
-                'promoName.required'=>'hace falta el nombre',
+                'promoName.required' => 'hace falta el nombre',
                 'promoName.unique' => 'El nombre de la promoción ya está en uso',
-                'promoDescription.required'=>'hace falta la descripción',
-                'promoPrice.required'=>'hace falta el precio',
-                'promoPrice.numeric' => 'El precio de la promoción debe ser numérico',      
-                  'promoPrice.min' => 'El precio de la promoción debe ser mayor a 0' 
+                'promoDescription.required' => 'hace falta la descripción',
+                'promoPrice.required' => 'hace falta el precio',
+                'promoPrice.numeric' => 'El precio de la promoción debe ser numérico',
+                'promoPrice.min' => 'El precio de la promoción debe ser mayor a 0'
 
             ]
         );
@@ -41,26 +41,27 @@ class PromotionController extends Controller
         return $promociones->registrarPromociones($request);
     }
 
-    public function verPromociones(){
+    public function verPromociones()
+    {
 
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-     $promociones= new Promotion();
-    return $promociones->obtenerPromociones();
+        $promociones = new Promotion();
+        return $promociones->obtenerPromociones();
     }
 
-    public function eliminarPromocion($id){
-   
+    public function eliminarPromocion($id)
+    {
+
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-        $promociones= new Promotion();
+        $promociones = new Promotion();
         return $promociones->eliminarPromociones($id);
     }
-
 }

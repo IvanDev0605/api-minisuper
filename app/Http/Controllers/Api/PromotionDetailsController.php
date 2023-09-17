@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\detailsPromo;
 use App\Models\Promotion;
@@ -26,7 +26,7 @@ class PromotionDetailsController extends Controller
             'quantityPieces.numeric' => 'La cantidad de piezas debe ser un número.',
             'quantityPieces.min' => 'La cantidad de piezas debe ser mayor a 0.',
         ]);
-        
+
 
         // $user = usuario::with('tipo')->find(auth()->user()->id);
         $user = User::find(auth()->user()->id)->tipo;
@@ -39,7 +39,8 @@ class PromotionDetailsController extends Controller
         return $detallePromo->registrarDetalles($request);
     }
 
-    public function verDetallePromocion($id){
+    public function verDetallePromocion($id)
+    {
 
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
@@ -47,18 +48,18 @@ class PromotionDetailsController extends Controller
         }
 
         $detallePromo = new detailsPromo();
-    return $detallePromo->verDetalles($id);
+        return $detallePromo->verDetalles($id);
     }
 
-    public function eliminarPromocion($id){
-   
+    public function eliminarPromocion($id)
+    {
+
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-        $promociones= new Promotion();
+        $promociones = new Promotion();
         return $promociones->eliminarPromociones($id);
     }
-
 }

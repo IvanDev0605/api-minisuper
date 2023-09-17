@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Size;
 use App\Models\User;
@@ -17,17 +17,17 @@ class SizeController extends Controller
             [
                 'nameSize' => 'required|unique:sizes',
                 'milliliters' => 'required|numeric|min:1',
-                'unidadMedida' =>'required'
+                'unidadMedida' => 'required'
 
-                
+
             ],
             [
                 'nameSize.unique' => 'El tipo ya esta registrado',
                 'milliliters.required' => 'Hace falta la cantidad',
                 'unidadMedida.required' => 'Hace falta la descripción',
-                'milliliters.numeric' => 'La cantidad debe ser numérica',    
+                'milliliters.numeric' => 'La cantidad debe ser numérica',
                 'milliliters.min' => 'La cantidad debe ser mayor a 0',
-              
+
             ]
         );
 
@@ -44,28 +44,30 @@ class SizeController extends Controller
 
 
 
-    
-    public function verTamaño(){
+
+    public function verTamaño()
+    {
 
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-     $size= new Size();
-    return $size->obtenerTamaño();
+        $size = new Size();
+        return $size->obtenerTamaño();
     }
 
 
-    
-    public function eliminarTamaño($id){
-   
+
+    public function eliminarTamaño($id)
+    {
+
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-        $size= new Size();
+        $size = new Size();
         return $size->eliminarTamaño($id);
     }
 }

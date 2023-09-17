@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\TypeProduct;
 use App\Models\User;
@@ -18,7 +18,7 @@ class TypeProductController extends Controller
                 'typeProduct' => 'required|unique:typesProducts',
                 'descriptionType' => 'required'
 
-                
+
             ],
             [
                 'typeProduct.unique' => 'El tipo ya esta registrado',
@@ -38,27 +38,27 @@ class TypeProductController extends Controller
         return $tipo->registrarTipo($request);
     }
 
-    public function verTipos(){
+    public function verTipos()
+    {
 
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-     $tipo= new TypeProduct();
-    return $tipo->obtenerTipos();
+        $tipo = new TypeProduct();
+        return $tipo->obtenerTipos();
     }
 
-    public function eliminarTipo($id){
-   
+    public function eliminarTipo($id)
+    {
+
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
 
-        $type= new TypeProduct();
+        $type = new TypeProduct();
         return $type->eliminarTipo($id);
     }
-
-
 }

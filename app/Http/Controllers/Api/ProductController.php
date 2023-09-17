@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\File;
 use App\Models\Product;
@@ -18,7 +18,7 @@ class ProductController extends Controller
         $request->validate(
             [
 
-                
+
                 'idMake' => 'required',
                 'idType' => 'required',
                 'idSize' => 'required',
@@ -78,25 +78,25 @@ class ProductController extends Controller
         return $producto->obtenerProductos();
     }
 
-    public function verProducto($id){
-     
-            Validator::make(['id' => $id], [
-                "id"=>"required|numeric|min:1",
-            ], [
-                "id.required"=>"Ingresa el código de barras",
-                "id.numeric"=>"El formato del código no es correcto",
-                "id.min"=>"No puedes mandar códigos negativos"
-            ])->validate();
-            // Resto del código para obtener y mostrar el producto
-    
-        
+    public function verProducto($id)
+    {
+
+        Validator::make(['id' => $id], [
+            "id" => "required|numeric|min:1",
+        ], [
+            "id.required" => "Ingresa el código de barras",
+            "id.numeric" => "El formato del código no es correcto",
+            "id.min" => "No puedes mandar códigos negativos"
+        ])->validate();
+        // Resto del código para obtener y mostrar el producto
+
+
         $user = User::find(auth()->user()->id)->tipo;
         if ($user["nameType"] != "Desarrollador" && $user["nameType"] != "Gerente") {
             return respPermisos(false, "crear tipos");
         }
         $producto = new Product();
         return $producto->obtenerProducto($id);
-
     }
 
     public function eliminarProducto($id)
