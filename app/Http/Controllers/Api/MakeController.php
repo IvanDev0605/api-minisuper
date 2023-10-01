@@ -17,7 +17,7 @@ class MakeController extends Controller
         $request->validate(
             [
                 'nameMake' => 'required|unique:makesProduct',
-                'imgMake' => 'required|mimes:png,jpg,jpeg'
+                'imgMake' => 'required|mimes:png,jpg,jpeg,webp'
 
 
             ],

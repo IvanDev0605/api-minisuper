@@ -24,7 +24,7 @@ class ProductController extends Controller
                 'idSize' => 'required',
                 'codeProduct' => 'required|unique:products',
                 'nameProduct' => 'required|unique:products',
-                'imgProduct' => 'required|mimes:png,jpg,jpeg',
+                'imgProduct' => 'required|mimes:png,jpg,jpeg,webp',
                 'stock' => 'required',
                 'purchasePrice' => 'required',
                 'salePrice' => 'required',

@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\TypeUserController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\SizeController;
 
-use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\Api\PromotionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
